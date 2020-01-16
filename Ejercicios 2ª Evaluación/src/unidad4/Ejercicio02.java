@@ -10,14 +10,19 @@ public class Ejercicio02 {
 		
 		System.out.println("Escribe un texto: ");
 		String cadena=in.nextLine();
-		cadenaInvertida(cadena);
+		String inversa=cadenaInvertida(cadena);
+		
+		System.out.println(inversa);
 
 	}
-public static void cadenaInvertida(String cadena) {
+public static String cadenaInvertida(String cadena) {
 	
+	String alreves="";
 	for (int j=cadena.length()-1; j>=0; j--) {
 		char c=cadena.charAt(j);
-		System.out.print(c);
-	}
+		alreves=alreves+c;
+		}
+	return alreves;
 }
+
 }
