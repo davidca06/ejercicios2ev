@@ -37,6 +37,7 @@ public class Ejercicio08 {
 		int i;
 		int sumaTotal=0;
 		int sumaParcial=0;
+		int contador=0;
 		
 		for (i=0; i<vector.length; i++) {
 						
@@ -46,6 +47,7 @@ public class Ejercicio08 {
 						sumaParcial=sumaParcial+vector[j];
 						if (sumaParcial!=7) {
 						vector[j]=0;
+						contador++;
 						sumaTotal=sumaTotal+vector[j];
 						}
 					}
@@ -60,6 +62,7 @@ public class Ejercicio08 {
 					
 
 		System.out.println("La suma es: " + sumaTotal);
+		System.out.println("Cantidad de números no sumados: "+contador);
 		/*System.out.println("Cantidad de elementos no sumados: " + (contador1 + contador2));*/
 	}
 }
