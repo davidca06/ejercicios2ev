@@ -4,15 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Ejercicio04 {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		Scanner in=new Scanner(System.in);
 		
 		Map <Integer,TreeSet<String>> mapa = new HashMap<Integer,TreeSet<String>>();
 		
@@ -21,52 +22,61 @@ public class Ejercicio04 {
 				
 		
 		do {
-		System.out.println("Texto: ");
-		String cadena=in.readLine();
+		System.out.println("Teclea \"Texto: \" o \"Lista n\" : ");
+		String cadena=in.nextLine();
+		
 		if (cadena.equalsIgnoreCase("fin")) {
 			fin=true;
 		}
+		else {
 		procesarLinea(cadena,mapa);
-				
+		}
+		System.out.println();
 		} while (!fin);
 		
 		
 		
+	}
 		
-		System.out.println("Lista n: ");
-		int numero=Integer.valueOf(in.readLine());
-		while (numero <= 0) {
-			System.out.println("La longitud del texto debe ser mayor de cero. Teclea otra vez: ");
-			numero=Integer.valueOf(in.readLine());
-		} 
-		
-		if (numero > 0) {
-			System.out.println(mapa.get(numero));
-		}
-		
-			
-			
-			
-		}
 		
 		
 		public static void procesarLinea (String cadena, Map <Integer,TreeSet<String>> mapa) {
 			
-			Scanner s=new Scanner(cadena);
+				if (cadena.charAt(0)=='T') {
+					String subcadena=cadena.substring(cadena.indexOf(" ")+2);
+					String [] palabras=subcadena.split(" ");
 			
-			while (s.hasNext()) {
-				String palabra=s.next();
-				int longitud= palabra.length();
+				for (int i=0; i<palabras.length; i++) {
+					int longitud=palabras[i].length();
 				TreeSet<String> coleccion=mapa.get(longitud);
 				if (coleccion == null) {
 					coleccion = new TreeSet<String>();
+					coleccion.add(palabras[i]);
 					mapa.put(longitud, coleccion);
-					coleccion.add(palabra);
+					
 				}
 				else {
-					coleccion.add(palabra);
+					coleccion.add(palabras[i]);
 				}
 										
+			}
+				}
+				else if (cadena.charAt(0)=='L') {
+					String digito=cadena.substring(6);
+					int n=Integer.parseInt(digito);
+					listar(mapa,n);
+				}
+				else {
+					System.out.println("Error");
+				}
+		}
+		
+		public static void listar (Map <Integer,TreeSet<String>> mapa, int n) {
+			
+			TreeSet<String> coleccion=mapa.get(n);
+			Iterator<String> it= coleccion.iterator();
+			while (it.hasNext()) {
+				System.out.print(it.next()+" ");
 			}
 			
 		}
